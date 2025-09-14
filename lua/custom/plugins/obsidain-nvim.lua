@@ -21,10 +21,17 @@ return {
       },
     },
 
+    templates = {
+      folder = '30_Resources/Templates',
+      date_format = '%Y-%m-%d',
+      time_format = '%H:%M',
+    },
+
     daily_notes = {
       folder = '50_Daily',
       date_format = '%Y-%m-%d',
       default_tags = { 'daily-notes' },
+      template = 'daily-note.md',
     },
 
     completion = {
