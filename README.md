@@ -117,6 +117,26 @@ examples of adding popularly requested plugins.
 > [!NOTE]
 > For more information about a particular plugin check its repository's documentation.
 
+#### Telekasten Multi-Vault Configuration
+
+This configuration includes a customized Telekasten setup for multi-vault personal knowledge management:
+
+* **WMS Vault** - Work Management System (`~/git/vaults/wms/`)
+* **LMS Vault** - Learning Management System (`~/git/vaults/lms/`)
+* **Shared Templates** - Centralized templates (`~/git/vaults/_templates/`)
+
+See `TELEKASTEN_WORKFLOW.md` for detailed workflow instructions and keymaps.
+
+##### Obsidian Integration
+
+The configuration includes integration with Obsidian for cross-platform note management:
+
+* Automatic handling of `obsidian://` URIs
+* Keymaps for generating and copying Obsidian URIs
+* Cross-vault linking capabilities
+
+See `TELEKASTEN_OBSIDIAN_INTEGRATION.md` for detailed integration instructions.
+
 
 ### Getting Started
 

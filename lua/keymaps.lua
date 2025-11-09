@@ -37,6 +37,43 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
+-- [[ Obsidian Keymaps ]]
+-- Daily workflow
+vim.keymap.set('n', '<leader>zdd', '<cmd>ObsidianToday<CR>', { desc = 'Obsidian: Open today\'s daily note' })
+
+-- Recent dailies
+vim.keymap.set('n', '<leader>zww', '<cmd>ObsidianDailies -7 0<CR>', { desc = 'Obsidian: Recent dailies' })
+
+-- Insert template
+vim.keymap.set('n', '<leader>zti', '<cmd>ObsidianTemplate<CR>', { desc = 'Obsidian: Insert template' })
+
+-- New note (default template)
+vim.keymap.set('n', '<leader>zn', '<cmd>ObsidianNewFromTemplate default-note.md<CR>', { desc = 'Obsidian: New note (default template)' })
+
+-- Open in Obsidian app
+vim.keymap.set('n', '<leader>zo', '<cmd>ObsidianOpen<CR>', { desc = 'Obsidian: Open in app' })
+
+-- Quick switch & search
+vim.keymap.set('n', '<leader>zq', '<cmd>ObsidianQuickSwitch<CR>', { desc = 'Obsidian: Quick switch' })
+vim.keymap.set('n', '<leader>zs', '<cmd>ObsidianSearch<CR>', { desc = 'Obsidian: Search' })
+
+-- Backlinks & tags
+vim.keymap.set('n', '<leader>zb', '<cmd>ObsidianBacklinks<CR>', { desc = 'Obsidian: Backlinks' })
+vim.keymap.set('n', '<leader>ztg', '<cmd>ObsidianTags<CR>', { desc = 'Obsidian: Tags' })
+
+-- Workspace switching
+vim.keymap.set('n', '<leader>zw', '<cmd>ObsidianWorkspace wms<CR>', { desc = 'Obsidian: Switch to WMS' })
+vim.keymap.set('n', '<leader>zl', '<cmd>ObsidianWorkspace lms<CR>', { desc = 'Obsidian: Switch to LMS' })
+
+-- Follow markdown links only when on a link
+vim.keymap.set('n', 'gf', function()
+  if require('obsidian').util.cursor_on_markdown_link() then
+    return '<cmd>ObsidianFollowLink<CR>'
+  else
+    return 'gf'
+  end
+end, { noremap = false, expr = true, desc = 'Obsidian: Follow link if on markdown link' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 

@@ -65,6 +65,10 @@ vim.o.inccommand = 'split'
 -- Show which line your cursor is on
 vim.o.cursorline = true
 
+-- Enable conceal level for Obsidian UI features
+-- See: https://github.com/epwalsh/obsidian.nvim/issues/286
+vim.o.conceallevel = 1
+
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10
 
