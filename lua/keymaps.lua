@@ -38,8 +38,36 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
 -- [[ Obsidian Keymaps ]]
+-- Helper: create an Obsidian note using a specific template in a specific subdir
+local function obsidian_new_note_from_template_in_subdir(subdir, template)
+  return function()
+    local ok, obsidian = pcall(require, 'obsidian')
+    if not ok then
+      vim.notify('Obsidian.nvim is not available', vim.log.levels.ERROR)
+      return
+    end
+
+    local client = obsidian.get_client()
+
+    -- Prompt for title
+    local title = vim.fn.input 'Title: '
+    if title == nil or title == '' then
+      return
+    end
+
+    -- dir is relative to the current workspace root
+    local dir = client.dir / subdir
+
+    client:create_note {
+      title = title,
+      dir = dir,
+      template = template, -- e.g. "task.md" or "project.md"
+    }
+  end
+end
+
 -- Daily workflow
-vim.keymap.set('n', '<leader>zdd', '<cmd>ObsidianToday<CR>', { desc = 'Obsidian: Open today\'s daily note' })
+vim.keymap.set('n', '<leader>zdd', '<cmd>ObsidianToday<CR>', { desc = "Obsidian: Open today's daily note" })
 
 -- Recent dailies
 vim.keymap.set('n', '<leader>zww', '<cmd>ObsidianDailies -7 0<CR>', { desc = 'Obsidian: Recent dailies' })
@@ -48,7 +76,13 @@ vim.keymap.set('n', '<leader>zww', '<cmd>ObsidianDailies -7 0<CR>', { desc = 'Ob
 vim.keymap.set('n', '<leader>zti', '<cmd>ObsidianTemplate<CR>', { desc = 'Obsidian: Insert template' })
 
 -- New note (default template)
-vim.keymap.set('n', '<leader>zn', '<cmd>ObsidianNewFromTemplate default-note.md<CR>', { desc = 'Obsidian: New note (default template)' })
+vim.keymap.set('n', '<leader>znn', '<cmd>ObsidianNewFromTemplate default-note.md<CR>', { desc = 'Obsidian: New note (default template)' })
+
+-- New Task note → 15_Tasks/ using task.md
+vim.keymap.set('n', '<leader>znt', obsidian_new_note_from_template_in_subdir('15_Tasks', 'task.md'), { desc = 'Obsidian: New task note' })
+
+-- New Project note → 10_Projects/ using project.md
+vim.keymap.set('n', '<leader>znp', obsidian_new_note_from_template_in_subdir('10_Projects', 'project.md'), { desc = 'Obsidian: New project note' })
 
 -- Open in Obsidian app
 vim.keymap.set('n', '<leader>zo', '<cmd>ObsidianOpen<CR>', { desc = 'Obsidian: Open in app' })
